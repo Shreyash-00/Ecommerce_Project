@@ -1,0 +1,322 @@
+/****** Script for SelectTopNRows command from SSMS  ******/
+create database Ecommerce_New;
+
+CREATE TABLE Category (
+    CategoryId INT PRIMARY KEY IDENTITY(1,1),
+    Name NVARCHAR(100) NOT NULL
+);
+
+
+
+select * from Category
+
+
+-- Insert predefined categories
+INSERT INTO Category (Name) VALUES ('Television');
+INSERT INTO Category (Name) VALUES ('Refrigerator');
+INSERT INTO Category (Name) VALUES ('Smartwatch');
+INSERT INTO Category (Name) VALUES ('Headset');
+INSERT INTO Category (Name) VALUES ('Mobile');
+
+
+
+CREATE TABLE Product_New (
+    PID INT PRIMARY KEY IDENTITY(1,1),
+    Category_Name VARCHAR(255),
+    Category_Id INT,
+    Price DECIMAL(10, 2),
+    BrandName VARCHAR(255),
+    Model_Year INT,
+    Television_Size VARCHAR(50),
+    Television_Type VARCHAR(50),
+    Television_OS VARCHAR(50),
+    Refrigerator_Capacity VARCHAR(50),
+    Refrigerator_Type VARCHAR(50),
+    Refrigerator_Star INT,
+    Refrigerator_Feature VARCHAR(255),
+    Smartwatch_DisplaySize VARCHAR(50),
+    Smartwatch_DisplayType VARCHAR(50),
+    Smartwatch_DialShape VARCHAR(50),
+    Headset_Type VARCHAR(50),
+    Headset_Connectivity VARCHAR(50),
+    Headset_Battery VARCHAR(50),
+    Headset_PowerOutput VARCHAR(50),
+    Mobile_ScreenSize VARCHAR(50),
+    Mobile_Storage VARCHAR(50),
+    Mobile_Processor VARCHAR(50),
+    Mobile_Battery VARCHAR(50),
+    Mobile_ScreenType VARCHAR(50),
+    FOREIGN KEY (Category_Id) REFERENCES Category(CategoryId),
+   
+);
+
+
+select * from Product_New
+
+
+
+-- Additional Television products
+INSERT INTO Product_New ( Category_Name, Category_Id, Price, BrandName, Model_Year, Television_Size, Television_Type, Television_OS)
+VALUES 
+( 'Television', 1, 549.99, 'LG', 2023, '65 inches', 'OLED', 'WebOS'),
+( 'Television', 1, 349.99, 'Sony', 2022, '50 inches', 'LCD', 'Android TV');
+
+-- Additional Refrigerator products
+INSERT INTO Product_New ( Category_Name, Category_Id, Price, BrandName, Model_Year, Refrigerator_Capacity, Refrigerator_Type, Refrigerator_Star, Refrigerator_Feature)
+VALUES 
+( 'Refrigerator', 2, 899.99, 'Whirlpool', 2023, '400 L', 'Side-by-Side', 5, 'Frost-Free'),
+( 'Refrigerator', 2, 699.99, 'Samsung', 2022, '300 L', 'Single Door', 3, 'Digital Inverter');
+
+-- Additional Smartwatch products
+INSERT INTO Product_New (Category_Name, Category_Id, Price, BrandName, Model_Year, Smartwatch_DisplaySize, Smartwatch_DisplayType, Smartwatch_DialShape)
+VALUES 
+('Smartwatch', 3, 179.99, 'Fitbit', 2023, '1.6 inches', 'AMOLED', 'Square'),
+('Smartwatch', 3, 249.99, 'Garmin', 2022, '1.3 inches', 'MIP', 'Round');
+
+-- Additional Headset products
+INSERT INTO Product_New (Category_Name, Category_Id, Price, BrandName, Model_Year, Headset_Type, Headset_Connectivity, Headset_Battery, Headset_PowerOutput)
+VALUES 
+('Headset', 4, 129.99, 'Bose', 2023, 'In-Ear', 'Bluetooth', '15 hours', '35mW'),
+('Headset', 4, 179.99, 'JBL', 2023, 'On-Ear', 'Bluetooth', '25 hours', '40mW');
+
+-- Additional Mobile products
+INSERT INTO Product_New (Category_Name, Category_Id, Price, BrandName, Model_Year, Mobile_ScreenSize, Mobile_Storage, Mobile_Processor, Mobile_Battery, Mobile_ScreenType)
+VALUES 
+('Mobile', 5, 799.99, 'Samsung', 2023, '6.5 inches', '128GB', 'Snapdragon 888', '5000mAh', 'Super AMOLED'),
+('Mobile', 5, 699.99, 'OnePlus', 2023, '6.7 inches', '256GB', 'Snapdragon 870', '4500mAh', 'Fluid AMOLED');
+
+-- More products
+INSERT INTO Product_New (Category_Name, Category_Id, Price, BrandName, Model_Year, Television_Size, Television_Type, Television_OS)
+VALUES ('Television', 1, 479.99, 'Vizio', 2022, '60 inches', 'LED', 'SmartCast');
+
+INSERT INTO Product_New (Category_Name, Category_Id, Price, BrandName, Model_Year, Refrigerator_Capacity, Refrigerator_Type, Refrigerator_Star, Refrigerator_Feature)
+VALUES ('Refrigerator', 2, 749.99, 'Haier', 2023, '320 L', 'Double Door', 4, 'Turbo Cooling');
+
+INSERT INTO Product_New (Category_Name, Category_Id, Price, BrandName, Model_Year, Smartwatch_DisplaySize, Smartwatch_DisplayType, Smartwatch_DialShape)
+VALUES ('Smartwatch', 3, 159.99, 'Amazfit', 2023, '1.5 inches', 'LCD', 'Square');
+
+INSERT INTO Product_New (Category_Name, Category_Id, Price, BrandName, Model_Year, Headset_Type, Headset_Connectivity, Headset_Battery, Headset_PowerOutput)
+VALUES ('Headset', 4, 119.99, 'Sennheiser', 2022, 'Over-Ear', 'Wired', 'N/A', '50mW');
+
+INSERT INTO Product_New (Category_Name, Category_Id, Price, BrandName, Model_Year, Mobile_ScreenSize, Mobile_Storage, Mobile_Processor, Mobile_Battery, Mobile_ScreenType)
+VALUES ('Mobile', 5, 649.99, 'Google', 2023, '6.3 inches', '128GB', 'Google Tensor', '4500mAh', 'OLED');
+
+
+
+-- Insert a Television product
+INSERT INTO Product_New (PID, Category_Name, Category_Id, Price, BrandName, Model_Year, Television_Size, Television_Type, Television_OS)
+VALUES (1, 'Television', 1, 499.99, 'Samsung', 2023, '55 inches', 'LED', 'Tizen');
+
+-- Insert a Refrigerator product
+INSERT INTO Product_New (PID, Category_Name, Category_Id, Price, BrandName, Model_Year, Refrigerator_Capacity, Refrigerator_Type, Refrigerator_Star, Refrigerator_Feature)
+VALUES (2, 'Refrigerator', 2, 799.99, 'LG', 2022, '350 L', 'Double Door', 4, 'Inverter Compressor');
+
+-- Insert a Smartwatch product
+INSERT INTO Product_New (PID, Category_Name, Category_Id, Price, BrandName, Model_Year, Smartwatch_DisplaySize, Smartwatch_DisplayType, Smartwatch_DialShape)
+VALUES (3, 'Smartwatch', 3, 199.99, 'Apple', 2023, '1.7 inches', 'Retina', 'Round');
+
+-- Insert a Headset product
+INSERT INTO Product_New (PID, Category_Name, Category_Id, Price, BrandName, Model_Year, Headset_Type, Headset_Connectivity, Headset_Battery, Headset_PowerOutput)
+VALUES (4, 'Headset', 4, 149.99, 'Sony', 2023, 'Over-Ear', 'Bluetooth', '30 hours', '50mW');
+
+-- Insert a Mobile product
+INSERT INTO Product_New (PID, Category_Name, Category_Id, Price, BrandName, Model_Year, Mobile_ScreenSize, Mobile_Storage, Mobile_Processor, Mobile_Battery, Mobile_ScreenType)
+VALUES (5, 'Mobile', 5, 999.99, 'Apple', 2023, '6.1 inches', '256GB', 'A16 Bionic', '4500mAh', 'OLED');
+
+INSERT INTO Product_New (Category_Name, Category_Id, Price, BrandName, Model_Year, Television_Size, Television_Type, Television_OS)
+
+VALUES
+
+('Television', 1, 499.99, 'Samsung', 2023, '55 Inch', 'LED', 'Tizen'),
+
+('Television', 1, 799.99, 'LG', 2022, '65 Inch', 'OLED', 'WebOS'),
+
+('Television', 1, 999.99, 'Sony', 2024, '75 Inch', 'QLED', 'Google TV');
+
+-- Inserting data for Refrigerator
+
+INSERT INTO Product_New (Category_Name, Category_Id, Price, BrandName, Model_Year, Refrigerator_Capacity, Refrigerator_Type, Refrigerator_Star, Refrigerator_Feature)
+
+VALUES
+
+('Refrigerator', 2, 899.99, 'LG', 2022, '500 Liters', 'Double Door', 5, 'Inverter Compressor'),
+
+('Refrigerator', 2, 599.99, 'Samsung', 2023, '350 Liters', 'Single Door', 4, 'Digital Inverter Technology'),
+
+('Refrigerator', 2, 1299.99, 'Whirlpool', 2024, '600 Liters', 'Side-by-Side', 5, 'IntelliSense Inverter');
+
+-- Inserting data for Smartwatch
+
+INSERT INTO Product_New (Category_Name, Category_Id, Price, BrandName, Model_Year, Smartwatch_DisplaySize, Smartwatch_DisplayType, Smartwatch_DialShape)
+
+VALUES
+
+('Smartwatch', 3, 199.99, 'Apple', 2024, '1.78 Inch', 'Retina', 'Square'),
+
+('Smartwatch', 3, 149.99, 'Samsung', 2023, '1.4 Inch', 'Super AMOLED', 'Circular'),
+
+('Smartwatch', 3, 179.99, 'Fitbit', 2024, '1.6 Inch', 'LCD', 'Square');
+
+-- Inserting data for Headset
+
+INSERT INTO Product_New (Category_Name, Category_Id, Price, BrandName, Model_Year, Headset_Type, Headset_Connectivity, Headset_Battery, Headset_PowerOutput)
+
+VALUES
+
+('Headset', 4, 99.99, 'Sony', 2023, 'Over-Ear', 'Bluetooth', '30 Hours', '20W'),
+
+('Headset', 4, 49.99, 'JBL', 2022, 'In-Ear', 'Wired', 'N/A', 'N/A'),
+
+('Headset', 4, 79.99, 'Bose', 2024, 'On-Ear', 'Bluetooth', '25 Hours', '18W');
+
+-- Inserting data for Mobile
+
+INSERT INTO Product_New (Category_Name, Category_Id, Price, BrandName, Model_Year, Mobile_ScreenSize, Mobile_Storage, Mobile_Processor, Mobile_Battery, Mobile_ScreenType)
+
+VALUES
+
+('Mobile', 5, 699.99, 'OnePlus', 2024, '6.7 Inch', '256 GB', 'Snapdragon 888', '4500 mAh', 'AMOLED'),
+
+('Mobile', 5, 999.99, 'Apple', 2023, '6.1 Inch', '512 GB', 'A16 Bionic', '4000 mAh', 'Super Retina XDR'),
+
+('Mobile', 5, 599.99, 'Samsung', 2024, '6.5 Inch', '128 GB', 'Exynos 2100', '5000 mAh', 'Dynamic AMOLED');
+ 
+--stored procedure by category name
+
+CREATE or alter PROCEDURE GetProductsByCategory
+
+    @CategoryName VARCHAR(255)
+
+AS
+
+BEGIN
+
+    IF @CategoryName = 'Television'
+
+    BEGIN
+
+        SELECT PID, Category_Name, Category_Id, Price, BrandName, Model_Year, 
+
+               Television_Size, Television_Type, Television_OS
+
+        FROM Product_New
+
+        WHERE Category_Name = @CategoryName
+
+          AND (Television_Size IS NOT NULL OR 
+
+               Television_Type IS NOT NULL OR 
+
+               Television_OS IS NOT NULL);
+
+    END
+
+    ELSE IF @CategoryName = 'Refrigerator'
+
+    BEGIN
+
+        SELECT PID, Category_Name, Category_Id, Price, BrandName, Model_Year, 
+
+               Refrigerator_Capacity, Refrigerator_Type, Refrigerator_Star, Refrigerator_Feature
+
+        FROM Product_New
+
+        WHERE Category_Name = @CategoryName
+
+          AND (Refrigerator_Capacity IS NOT NULL OR 
+
+               Refrigerator_Type IS NOT NULL OR 
+
+               Refrigerator_Star IS NOT NULL OR 
+
+               Refrigerator_Feature IS NOT NULL);
+
+    END
+
+    ELSE IF @CategoryName = 'Smartwatch'
+
+    BEGIN
+
+        SELECT PID, Category_Name, Category_Id, Price, BrandName, Model_Year, 
+
+               Smartwatch_DisplaySize, Smartwatch_DisplayType, Smartwatch_DialShape
+
+        FROM Product_New
+
+        WHERE Category_Name = @CategoryName
+
+          AND (Smartwatch_DisplaySize IS NOT NULL OR 
+
+               Smartwatch_DisplayType IS NOT NULL OR 
+
+               Smartwatch_DialShape IS NOT NULL);
+
+    END
+
+    ELSE IF @CategoryName = 'Headset'
+
+    BEGIN
+
+        SELECT PID, Category_Name, Category_Id, Price, BrandName, Model_Year, 
+
+               Headset_Type, Headset_Connectivity, Headset_Battery, Headset_PowerOutput
+
+        FROM Product_New
+
+        WHERE Category_Name = @CategoryName
+
+          AND (Headset_Type IS NOT NULL OR 
+
+               Headset_Connectivity IS NOT NULL OR 
+
+               Headset_Battery IS NOT NULL OR 
+
+               Headset_PowerOutput IS NOT NULL);
+
+    END
+
+    ELSE IF @CategoryName = 'Mobile'
+
+    BEGIN
+
+        SELECT PID, Category_Name, Category_Id, Price, BrandName, Model_Year, 
+
+               Mobile_ScreenSize, Mobile_Storage, Mobile_Processor, Mobile_Battery, Mobile_ScreenType
+
+        FROM Product_New
+
+        WHERE Category_Name = @CategoryName
+
+          AND (Mobile_ScreenSize IS NOT NULL OR 
+
+               Mobile_Storage IS NOT NULL OR 
+
+               Mobile_Processor IS NOT NULL OR 
+
+               Mobile_Battery IS NOT NULL OR 
+
+               Mobile_ScreenType IS NOT NULL);
+
+    END
+
+    ELSE
+
+    BEGIN
+
+        SELECT * FROM Product_New WHERE 1=0; -- return empty result for unrecognized categories
+
+    END
+
+END;
+ 
+EXEC GetProductsByCategory @CategoryName = 'Television';
+
+EXEC GetProductsByCategory @CategoryName = 'Refrigerator';
+
+EXEC GetProductsByCategory @CategoryName = 'Headset';
+
+EXEC GetProductsByCategory @CategoryName = 'Smartwatch';
+
+EXEC GetProductsByCategory @CategoryName = 'Mobile';
+
+ 
