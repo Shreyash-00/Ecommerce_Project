@@ -1,0 +1,67 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (string.IsNullOrEmpty(Request.QueryString["categoryName"]))
+{
+    // Default content when no category is selected
+    <h1>Welcome to our e-commerce site</h1>
+    <p>Please select a category from the header to view products.</p>
+}
+else
+{
+    // Display products for the selected category
+    <h1>Products in @ViewBag.CategoryName</h1>
+
+    if (ViewBag.ProductsData != null)
+    {
+        var productsData = Html.Raw(ViewBag.ProductsData);
+        <table id="productsTable" border="1">
+            <thead>
+                <tr id="tableHeader"></tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                var productsData = @Html.Raw(ViewBag.ProductsData);
+                var tableHeader = $('#tableHeader');
+                var tableBody = $('#tableBody');
+
+                if (productsData.length > 0) {
+                    var columns = Object.keys(productsData[0]);
+
+                    // Create table header
+                    columns.forEach(function (column) {
+                        tableHeader.append('<th>' + column + '</th>');
+                    });
+
+                    // Create table rows
+                    productsData.forEach(function (product) {
+                        var row = $('<tr></tr>');
+                        columns.forEach(function (column) {
+                            var cellValue = product[column] || ''; // Handle null or undefined values
+                            row.append('<td>' + cellValue + '</td>');
+                        });
+
+                        // Make the row clickable and link to the details page
+                        row.on('click', function () {
+                            window.location.href = '@Url.Action("Details", "Products")?pid=' + product.PID;
+                        });
+
+                        tableBody.append(row);
+                    });
+                } else {
+                    tableBody.append('<tr><td colspan="100%">No products found.</td></tr>');
+                }
+            });
+        </script>
+    }
+    else
+    {
+        <p>No data available for @ViewBag.CategoryName.</p>
+    }
+}
+

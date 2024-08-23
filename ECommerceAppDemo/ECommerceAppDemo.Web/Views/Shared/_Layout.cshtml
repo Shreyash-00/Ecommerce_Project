@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/site.css")" />
+</head>
+<body>
+    <header>
+        <h1>My E-Commerce Site</h1>
+        <nav>
+            <ul>
+                @foreach (var category in ViewBag.Categories ?? new List<string>())
+                {
+                    <li>
+                        <a href="@Url.Action("Index", "Products", new { categoryName = category })">@category</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </header>
+
+    <main role="main" class="container">
+        @RenderBody()
+    </main>
+
+    <footer>
+        <p>&copy; @DateTime.Now.Year - My E-Commerce Site</p>
+    </footer>
+</body>
+</html>
